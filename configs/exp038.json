@@ -1,0 +1,72 @@
+{
+    "paths": {
+        "base_dir": "/home/haruhiko/Documents/PredicTIS",
+        "input_dir": "input_data",
+        "result_dir": "results/exp038"
+    },
+
+    "loss": {
+        "regression": {
+            "weight": 0.5,
+            "kind": "mse",
+            "huber_delta": 1.0
+        },
+        "classification": {
+            "weight": 0.0,
+            "kind": "cross_entropy",
+            "gamma": 2.0
+        },
+        "binarization": {
+            "weight": 0.5,
+            "kind": "bce",
+            "focal_alpha": 1.0,
+            "focal_gamma": 0.5
+        }},
+
+    "data": {
+        "target": "cosine similarity",
+        "expected_replicates_per_transcript": 4,
+        "transcript_name_pattern": "underscore_split",
+        "custom_transcript_regex": null
+    },
+
+    "model": {
+        "name": "AttentionUNet1D",
+        "input_features": 5,
+        "num_features": 64,
+        "dropout_prob": 0.1,
+        "num_layers": 3,
+        "attention_layers": [1, 2, 3],
+        "init_threshold": 0.2,
+        "nhead": 8,
+        "pretrained_model_name": null
+    },
+
+    "hyena": {
+        "context_length": 65536,
+        "order": 4,
+        "short_conv_size": 3,
+        "d_filter_mlp": 16,
+        "n_filter_layers": 3,
+        "d_embed": 3,
+        "omega": 8,
+        "use_mlp": false
+    },
+
+    "positional_encoding": {
+        "use": false,
+        "type": "sinusoidal",
+        "dim": 2,
+        "normalize": false
+    },
+
+    "training": {
+        "seed": 524,
+        "num_epochs": 20,
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0,
+        "n_splits": 10,
+        "stop_splits_at": 10
+    }
+}

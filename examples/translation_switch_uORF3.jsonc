@@ -1,0 +1,288 @@
+// Configuration of the uORF3 translation-switch design run (seed 2772, 1,280 nt, 1,024 candidates,
+// 600 generations, ExtraTrees proposals, 64 Evo2-generated initial sequences).
+// Differences from the run's resolved configuration: output_root, the removed output_dir
+// (created per run), models.exp038_weights_dir and gif.enabled.
+{
+  "output_root": "outputs/design",
+  "experiment_name": "uORF3",
+  "timestamp_experiment_dir": true,
+  "seed": 2772,
+  "length": 1280,
+  "models": {
+    "exp038_weights_dir": "private/weights/exp038/fold_1",
+    "exp038_backbone": "InstaDeepAI/NTv3_100M_pre",
+    "exp038_folds": 1,
+    "device": "auto",
+    "evo2_model": "evo2_1b_base"
+  },
+  "fixed_segments": [
+    {
+      "label": "pre_luciferase_stop",
+      "start": 274,
+      "sequence": "TAACTA"
+    },
+    {
+      "label": "luciferase_kozak",
+      "start": 280,
+      "sequence": "GCCACC"
+    },
+    {
+      "label": "luciferase",
+      "start": 286,
+      "sequence": "ATGGCTTCCAAGGTGTACGACCCCGAGCAACGCAAACGCATGATCACTGGGCCTCAGTGGTGGGCTCGCTGCAAGCAAATGAACGTGCTGGACTCCTTCATCAACTACTATGATTCCGAGAAGCACGCCGAGAACGCCGTGATTTTTCTGCATGGTAACGCTGCCTCCAGCTACCTGTGGAGGCACGTCGTGCCTCACATCGAGCCCGTGGCTAGATGCATCATCCCTGATCTGATCGGAATGGGTAAGTCCGGCAAGAGCGGGAATGGCTCATATCGCCTCCTGGATCACTACAAGTACCTCACCGCTTGGTTCGAGCTGCTGAACCTTCCAAAGAAAATCATCTTTGTGGGCCACGACTGGGGGGCTTGTCTGGCCTTTCACTACTCCTACGAGCACCAAGACAAGATCAAGGCCATCGTCCATGCTGAGAGTGTCGTGGACGTGATCGAGTCCTGGGACGAGTGGCCTGACATCGAGGAGGATATCGCCCTGATCAAGAGCGAAGAGGGCGAGAAAATGGTGCTTGAGAATAACTTCTTCGTCGAGACCATGCTCCCAAGCAAGATCATGCGGAAACTGGAGCCTGAGGAGTTCGCTGCctacctggagccattcaaggagaagggcgaggttagacggcctaccctctcctggcctcgcgagatccctctcgttaagggaggcaagcccgacgtcgtccagattgtccgcaactacaacgcctaccttcgggccagcgacgatctgcctaagatgttcatcgagtccgaccctgggttcttttccaacgctattgtcgagggagctaagaagttccctaacaccgagttcgtgaaggtgaagggcctccacttcagccaggaggacgctccagatgaaatgggtaagtacatcaagagcttcgtggagcgcgtgctgaagaacgagcagtaa"
+    },
+    {
+      "label": "polyA_tail",
+      "start": 1222,
+      "sequence": "TTCTAGGCGATCGCTCGAGCCCGGGAATTCGTTTAAACCTAGAGCGGCCGCTGGCCGC"
+    }
+  ],
+  "sites": [
+    {
+      "name": "uORF1",
+      "position": 30,
+      "group": "uorf"
+    },
+    {
+      "name": "uORF2",
+      "position": 110,
+      "group": "uorf"
+    },
+    {
+      "name": "uORF3",
+      "position": 190,
+      "group": "uorf"
+    },
+    {
+      "name": "luciferase",
+      "position": 286,
+      "group": "luciferase"
+    }
+  ],
+  "success_constraints": {
+    "normal_uorf_mean_min": 0.12,
+    "normal_luciferase_max": 0.08,
+    "stress_luciferase_min": 0.08,
+    "stress_uorf_mean_max": 0.14,
+    "luciferase_induction_min": 0.04,
+    "uorf_difference_sum_min": 0.04,
+    "uorf_difference_sites": [
+      "uORF1",
+      "uORF2",
+      "uORF3"
+    ]
+  },
+  "site_constraints": [
+    {
+      "site": "uORF1",
+      "condition": "normal",
+      "min": 0.1
+    },
+    {
+      "site": "uORF2",
+      "condition": "normal",
+      "min": 0.03
+    },
+    {
+      "site": "uORF3",
+      "condition": "normal",
+      "min": 0.08
+    },
+    {
+      "site": "luciferase",
+      "condition": "normal",
+      "max": 0.08
+    },
+    {
+      "site": "luciferase",
+      "condition": "stress",
+      "min": 0.08
+    },
+    {
+      "site": "luciferase",
+      "difference": "stress_minus_normal",
+      "min": 0.04
+    }
+  ],
+  "objective_weights": {
+    "desired_pair_min": 10.0,
+    "normal_uorf_mean": 1.3,
+    "stress_luciferase": 11.5,
+    "luciferase_induction": 11.5,
+    "uorf_difference_sum": 1.95,
+    "normal_luciferase_penalty": 4.0,
+    "stress_uorf_mean_penalty": 2.45,
+    "internal_tis_penalty": 0.5
+  },
+  "site_objectives": [
+    {
+      "site": "uORF1",
+      "condition": "normal",
+      "direction": "high",
+      "weight": 1.3
+    },
+    {
+      "site": "uORF2",
+      "condition": "normal",
+      "direction": "high",
+      "weight": 1.3
+    },
+    {
+      "site": "uORF3",
+      "condition": "normal",
+      "direction": "high",
+      "weight": 2.6
+    },
+    {
+      "site": "uORF1",
+      "difference": "normal_minus_stress",
+      "direction": "high",
+      "weight": 0.65
+    },
+    {
+      "site": "uORF2",
+      "difference": "normal_minus_stress",
+      "direction": "high",
+      "weight": 0.65
+    },
+    {
+      "site": "uORF3",
+      "difference": "normal_minus_stress",
+      "direction": "high",
+      "weight": 1.3
+    },
+    {
+      "site": "luciferase",
+      "condition": "normal",
+      "direction": "low",
+      "weight": 6.9
+    },
+    {
+      "site": "luciferase",
+      "difference": "stress_minus_normal",
+      "direction": "high",
+      "weight": 9.2
+    }
+  ],
+  "metric_target_objectives": [
+    {
+      "site": "uORF1",
+      "condition": "normal",
+      "min": 0.15,
+      "weight": 16.0
+    },
+    {
+      "site": "uORF2",
+      "condition": "normal",
+      "min": 0.03,
+      "weight": 80.0
+    },
+    {
+      "site": "uORF3",
+      "condition": "normal",
+      "min": 0.12,
+      "weight": 20.0
+    },
+    {
+      "site": "uORF1",
+      "condition": "stress",
+      "max": 0.14,
+      "weight": 2.2
+    },
+    {
+      "site": "uORF2",
+      "condition": "stress",
+      "max": 0.08,
+      "weight": 5.5
+    },
+    {
+      "site": "uORF3",
+      "condition": "stress",
+      "max": 0.08,
+      "weight": 3.3
+    },
+    {
+      "site": "luciferase",
+      "condition": "normal",
+      "max": 0.06,
+      "weight": 18.4
+    },
+    {
+      "site": "luciferase",
+      "condition": "stress",
+      "min": 0.12,
+      "weight": 18.4
+    }
+  ],
+  "naturalness_constraint": "none",
+  "evo2_constraint": {
+    "raw_baseline_n": 0,
+    "sd_multiplier": -1.0,
+    "initial_seed_count": 64,
+    "prompt": "ACGT",
+    "temperature": 1.0,
+    "top_k": 4,
+    "topk_per_generation": 0,
+    "batch_size": 4,
+    "weight": 0.0,
+    "fail_penalty": 0.0
+  },
+  "stability_model": {
+    "enabled": false,
+    "project_root": ".",
+    "webapp_dir": "third_party/RNAdegformer-Webapp",
+    "arnie_src": "third_party/arnie/src",
+    "weights_dir": "model_assets/RNAdegformer-Webapp/RNA_Inference/best_weights",
+    "folds": "all",
+    "target_columns": [
+      "reactivity",
+      "deg_Mg_pH10",
+      "deg_pH10",
+      "deg_Mg_50C",
+      "deg_50C"
+    ],
+    "topk_per_generation": 8,
+    "weight": 0.8,
+    "max_mean_degradation": null,
+    "fail_penalty": 1.0
+  },
+  "bo": {
+    "enabled": true,
+    "start_generation": 20,
+    "min_observations": 4096,
+    "interval": 1,
+    "proposals_per_generation": 128,
+    "candidate_pool_size": 4096,
+    "seed_elite_count": 48,
+    "mutated_elite_fraction": 0.55,
+    "crossover_fraction": 0.3,
+    "train_max_samples": 12000,
+    "n_estimators": 64,
+    "max_features": "sqrt",
+    "min_samples_leaf": 2,
+    "bootstrap": true,
+    "exploration_beta": 0.75,
+    "n_jobs": -1
+  },
+  "ga": {
+    "population_size": 1024,
+    "generations": 600,
+    "batch_size": 256,
+    "elite_count": 48,
+    "random_immigrants": 128,
+    "tournament_k": 5,
+    "mutation_rate": 0.035,
+    "local_mutation_rate": 0.12,
+    "local_mutation_radius": 8
+  },
+  "gif": {
+    "enabled": true,
+    "top_rank": 128,
+    "right_profile_count": 5,
+    "fps": 8,
+    "interval_ms": 120,
+    "frame_step": 2,
+    "point_size": 18,
+    "point_alpha": 0.72
+  }
+}
