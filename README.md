@@ -216,3 +216,9 @@ seed_everything(int(config.get("seed", 0)))
 optimizer = SequenceOptimizer(config)
 summary = optimizer.write_outputs(optimizer.run())   # outputs under output_dir, summary as in summary.json
 ```
+
+### License
+
+This repository is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+
+Commercial use requires a separate license agreement. For commercial licensing inquiries, please contact the authors.
