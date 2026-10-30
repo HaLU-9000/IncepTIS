@@ -148,7 +148,7 @@ For mouse, replace the FASTA with `--species mouse --gencode-release vM39`. Shar
 To reproduce our design experiment, install Evo 2 with command below (because we used Evo 2 to generate initial seqences).
 ```bash
 mkdir -p private/wheels
-gh release download v0.3.1 --repo HaLU-9000/IncepTIS --pattern "transformer_engine_torch-2.12.0-cp312-cp312-linux_x86_64.whl" --dir private/wheels
+gh release download v0.4.0 --repo HaLU-9000/IncepTIS --pattern "transformer_engine_torch-2.12.0-cp312-cp312-linux_x86_64.whl" --dir private/wheels
 echo "d672937b92b3c81ea0b59dd0f20cb2ccf45eb099685a0599ce52b674366fedea  private/wheels/transformer_engine_torch-2.12.0-cp312-cp312-linux_x86_64.whl" | sha256sum -c -
 uv pip install --python .venv/bin/python -r requirements.evo2-cu128.txt
 uv pip install --python .venv/bin/python --no-deps private/wheels/transformer_engine_torch-2.12.0-cp312-cp312-linux_x86_64.whl
